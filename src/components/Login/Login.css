@@ -1,0 +1,19 @@
+.Login {
+    background-color: black;
+    height:100vh;
+    display: grid;
+    place-items: center;
+}
+
+.Login__logo {
+    width:auto;
+    height: 200px;
+}
+.Login__link {
+    color:white;
+    text-decoration: none;
+    padding: 15px;
+    background-color: #1db954;
+    border-radius: 25px;
+    margin-bottom: 100px;
+}
