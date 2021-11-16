@@ -5,14 +5,11 @@ import useMood from "../../hooks/useMood";
 
 
 function Finder(){
-    const { playlists, songs } = useMood();
+    const { topSong } = useMood();
 
     return(
         <div>
-            {songs?.join()}
-            {playlists?.length && playlists.map((i)=>{
-                return <div>{i}</div>}
-            )}
+            {topSong}
         </div>
     )
 }

@@ -3,16 +3,15 @@ import { spotify } from "../api/spotify";
 
 const useMood = () => {
 
-
+  const [topSong, setTopSong] = useState();
 
   useEffect(() => {
     (async()=> {
       const playlist = await getPlaylist();
       const songs = await getSongs(playlist);
       const topSong = await getTopSong(songs);
-      console.log(playlist)
+      setTopSong(topSong)
     })();
-    //return topSong
   }, []);
 
 
@@ -23,7 +22,7 @@ const useMood = () => {
       return playlistIds;
     });
   }
-
+  
   const getSongs = async (playlistIds) => {
     const playlistsSongs = [];
     await Promise.all(playlistIds.map(async (element) => {
@@ -42,11 +41,11 @@ const useMood = () => {
       acc[val] = (acc[val] || 0 ) + 1
       return acc
    },{})
-  console.log("topsong", Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b))
+  return Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
   }
 
   return {
-    //topSong
+    topSong
   };
 };
 
