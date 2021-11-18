@@ -3,14 +3,17 @@ import { spotify } from "../api/spotify";
 
 const useMood = () => {
 
-  const [topSong, setTopSong] = useState();
+  const [topSongInfo, setTopSongInfo] = useState({name: ""});
+  console.log("topSongInfo", topSongInfo)
 
   useEffect(() => {
-    (async()=> {
+    (async () => {
       const playlist = await getPlaylist();
       const songs = await getSongs(playlist);
-      const topSong = await getTopSong(songs);
-      setTopSong(topSong)
+      const topSongId = await getTopSong(songs);
+      const topSongInfo = await getTrackInfo(topSongId);
+      console.log("topSongInfo2", topSongInfo)
+      setTopSongInfo(topSongInfo)
     })();
   }, []);
 
@@ -22,7 +25,7 @@ const useMood = () => {
       return playlistIds;
     });
   }
-  
+
   const getSongs = async (playlistIds) => {
     const playlistsSongs = [];
     await Promise.all(playlistIds.map(async (element) => {
@@ -37,15 +40,23 @@ const useMood = () => {
   }
 
   const getTopSong = (songs) => {
-    const hashmap = songs.reduce( (acc, val) => {
-      acc[val] = (acc[val] || 0 ) + 1
+    const hashmap = songs.reduce((acc, val) => {
+      acc[val] = (acc[val] || 0) + 1
       return acc
-   },{})
-  return Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
+    }, {})
+    return Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
+  }
+
+  const getTrackInfo = (topSongId) => {
+    return spotify.getTrack(topSongId).then(function (result) {
+      console.log("id", topSongId)
+      console.log(result);
+      return result
+    });
   }
 
   return {
-    topSong
+    topSongInfo
   };
 };
 

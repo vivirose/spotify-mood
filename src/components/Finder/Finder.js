@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { spotify } from "../../api/spotify";
 import useMood from "../../hooks/useMood";
-
+import Song from "../Song/Song";
 
 
 function Finder(){
-    const { topSong } = useMood();
+
+    const { topSongInfo } = useMood()
 
     return(
         <div>
-            {topSong}
+            {topSongInfo.name}
         </div>
     )
 }
