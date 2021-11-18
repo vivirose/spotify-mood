@@ -1,25 +1,42 @@
 import { useState, useEffect } from "react";
 import { spotify } from "../api/spotify";
 
-const useMood = () => {
 
-  const [topSongInfo, setTopSongInfo] = useState({name: ""});
+const artist = {
+  name: "",
+  creationDate: ""
+}
+
+const image = {
+  url: ""
+}
+
+const defaultSong = {
+  name: "", 
+  album: {images:[image]}, 
+  artists: [artist], 
+  external_urls: {}
+}
+
+const useMood = (mood) => {
+
+  const [topSongInfo, setTopSongInfo] = useState(defaultSong);
   console.log("topSongInfo", topSongInfo)
 
   useEffect(() => {
     (async () => {
-      const playlist = await getPlaylist();
+      const playlist = await getPlaylist(mood);
       const songs = await getSongs(playlist);
       const topSongId = await getTopSong(songs);
       const topSongInfo = await getTrackInfo(topSongId);
       console.log("topSongInfo2", topSongInfo)
       setTopSongInfo(topSongInfo)
     })();
-  }, []);
+  }, [mood]);
 
 
-  const getPlaylist = () => {
-    return spotify.search("happy", ["playlist"]).then(function (result) {
+  const getPlaylist = (mood) => {
+    return spotify.search(mood, ["playlist"]).then(function (result) {
       const playlistIds = [];
       result.playlists.items.forEach((element) => playlistIds.push(element.id));
       return playlistIds;
