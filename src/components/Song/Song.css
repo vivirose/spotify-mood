@@ -1,0 +1,25 @@
+.song{
+    background-color: rgba(226, 165, 228, 0.897);
+    display: flex;
+    place-items: center;
+    height: auto;
+    padding: 10px;
+    width: 700px;
+}
+
+.button{
+    border-radius: 20px;
+    border-style: none;
+    padding: 5px;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: rgb(212, 120, 135);
+    color: white
+}
+
+.song__info{
+    padding: 20px;
+}
+

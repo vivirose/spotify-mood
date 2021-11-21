@@ -1,6 +1,6 @@
-import { useState } from "react/cjs/react.development"
+import "./MoodPicker.css"
 
-const moods= ["Happy", "Sad", "Angry"]
+const moods= ["Pick a Mood:", "Happy", "Sad", "Annoyed", "Lonely", "Confident", "Calm", "Anxious", "Blessed", "Loving"]
 
 
 function MoodPicker({onPick}){
@@ -8,9 +8,8 @@ function MoodPicker({onPick}){
 
     return(
         <form>
-            <label>Pick a mood</label>
-            <select onChange={(e) => onPick(e)}>
-                {moods.map((mood)=>{return <option>{mood}</option>})}
+            <select onChange={(e) => onPick(e)} className="moodDropdown" aria-label="Pick a mood">
+                {moods.map((mood)=>{return <option key={mood}>{mood}</option>})}
             </select>
     </form>
     )

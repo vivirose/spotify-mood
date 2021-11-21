@@ -1,0 +1,18 @@
+.finder{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: blueviolet;
+    height: 100vh;
+    font-family: 'Zilla Slab', serif;
+    color: white;
+    padding-bottom: 300px;
+}
+
+.finder__mood{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

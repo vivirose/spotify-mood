@@ -49,7 +49,8 @@ const useMood = (mood) => {
       const result = await spotify.getPlaylistTracks(element);
 
       result.items.forEach(async (item) => {
-        playlistsSongs.push(item.track.id)
+        console.log("tracks", item)
+        item.track && playlistsSongs.push(item.track.id)
       });
 
     }));
